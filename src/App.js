@@ -13,6 +13,7 @@ export const ACTIONS = {
 }
 
 function reducer(state, { type, payload }) {
+  // eslint-disable-next-line
   switch (type) {
     case ACTIONS.ADD_DIGIT:
       if (state.overwrite) {
@@ -33,6 +34,7 @@ function reducer(state, { type, payload }) {
         ...state,
         currentOperand: `${state.currentOperand || ""}${payload.digit}`,
       }
+      break;
     case ACTIONS.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
         return state
@@ -60,8 +62,10 @@ function reducer(state, { type, payload }) {
         operation: payload.operation,
         currentOperand: null,
       }
+      break;
     case ACTIONS.CLEAR:
       return {}
+      break;
     case ACTIONS.DELETE_DIGIT:
       if (state.overwrite) {
         return {
@@ -79,6 +83,7 @@ function reducer(state, { type, payload }) {
         ...state,
         currentOperand: state.currentOperand.slice(0, -1),
       }
+      break;
     case ACTIONS.EVALUATE:
       if (
         state.operation == null ||
@@ -87,7 +92,6 @@ function reducer(state, { type, payload }) {
       ) {
         return state
       }
-
       return {
         ...state,
         overwrite: true,
@@ -95,9 +99,10 @@ function reducer(state, { type, payload }) {
         operation: null,
         currentOperand: evaluate(state),
       }
+      break;
   }
 }
-
+// eslint-disable-next-line
 function evaluate({ currentOperand, previousOperand, operation }) {
   const prev = parseFloat(previousOperand)
   const current = parseFloat(currentOperand)
@@ -106,16 +111,16 @@ function evaluate({ currentOperand, previousOperand, operation }) {
   switch (operation) {
     case "+":
       computation = prev + current
-      break
+      break;
     case "-":
       computation = prev - current
-      break
+      break;
     case "*":
       computation = prev * current
       break
     case "÷":
       computation = prev / current
-      break
+      break;
   }
 
   return computation.toString()
