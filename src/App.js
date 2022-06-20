@@ -61,7 +61,7 @@ function reducer(state, { type, payload }) {
         operation: payload.operation,
         currentOperand: null,
       }
-      break;
+      
     case ACTIONS.CLEAR:
       return {}
     case ACTIONS.DELETE_DIGIT:
@@ -107,6 +107,7 @@ function evaluate({ currentOperand, previousOperand, operation }) {
   switch (operation) {
     case "+":
       computation = prev + current
+      break;
     case "-":
       break;
       computation = prev - current
