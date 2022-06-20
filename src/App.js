@@ -109,10 +109,9 @@ function evaluate({ currentOperand, previousOperand, operation }) {
       computation = prev + current
       break;
     case "-":
-      break;
       computation = prev - current
-    case "*":
       break;
+    case "*":
       computation = prev * current
       break;
     case "÷":
